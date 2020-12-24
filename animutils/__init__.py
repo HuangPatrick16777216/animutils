@@ -64,3 +64,5 @@ class XMido:
 
         sys.stdout.write("\nFinished parsing messages.\n")
         sys.stdout.flush()
+
+        return final
