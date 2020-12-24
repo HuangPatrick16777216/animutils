@@ -61,6 +61,7 @@ class XMido:
                         curr_note["note"] = msg.note
                         curr_note["volume"] = msg.velocity
                         curr_note["time"] = frame
+                        final.append(curr_note)
 
         sys.stdout.write("\nFinished parsing messages.\n")
         sys.stdout.flush()
