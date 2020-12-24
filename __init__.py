@@ -16,3 +16,14 @@
 # ##### END GPL LICENSE BLOCK #####
 
 import mido
+
+
+class XMido:
+    """Extended midi object (uses mido)"""
+
+    def __init__(self, path):
+        """
+        Initializes midi object.
+        :param path: Path of midi file.
+        """
+        self.midi = mido.MidiFile(path)
