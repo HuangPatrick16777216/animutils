@@ -52,7 +52,7 @@ class XMido:
 
             if msg.is_meta:
                 frame += msg.time / self.midi.ticks_per_beat * tempo / 1000000 * fps
-                
+
                 if msg.type == "set_tempo":
                     tempo = msg.tempo
                 else:
@@ -61,3 +61,6 @@ class XMido:
                         curr_note["note"] = msg.note
                         curr_note["volume"] = msg.velocity
                         curr_note["time"] = frame
+
+        sys.stdout.write("\nFinished parsing messages.\n")
+        sys.stdout.flush()
