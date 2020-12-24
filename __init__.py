@@ -15,15 +15,49 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import sys
 import mido
 
 
 class XMido:
-    """Extended midi object (uses mido)"""
+    """Extended single track midi object (uses mido)"""
 
     def __init__(self, path):
         """
-        Initializes midi object.
+        Initializes midi object. Only the first track of the midi will be used.
         :param path: Path of midi file.
         """
         self.midi = mido.MidiFile(path)
+        self.track = self.midi.tracks[0]
+
+    def parse(self, fps, offset):
+        """
+        Removes meta messages and changes timescale to absolute frames.
+        :param fps: Frames per second of animation.
+        :param offset: Number of frames to offset
+        """
+        tempo = 500000
+        num_msgs = len(self.track)
+        final = []
+        frame = offset
+
+        sys.stdout.write(f"Parsing {num_msgs}...")
+        for i, msg in enumerate(self.track):
+            print_msg = f"Message {i} of {num_msgs}"
+            sys.stdout.write(print_msg)
+            sys.stdout.flush()
+            sys.stdout.write("\b" * len(print_msg))
+            sys.stdout.write(" " * len(print_msg))
+            sys.stdout.write("\b" * len(print_msg))
+
+            if msg.is_meta:
+                frame += msg.time / self.midi.ticks_per_beat * tempo / 1000000 * fps
+                
+                if msg.type == "set_tempo":
+                    tempo = msg.tempo
+                else:
+                    if msg.type == "note_on":
+                        curr_note = {}
+                        curr_note["note"] = msg.note
+                        curr_note["volume"] = msg.velocity
+                        curr_note["time"] = frame
