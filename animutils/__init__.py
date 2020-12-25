@@ -50,9 +50,8 @@ class XMido:
             sys.stdout.write(" " * len(print_msg))
             sys.stdout.write("\b" * len(print_msg))
 
+            frame += msg.time / self.midi.ticks_per_beat * tempo / 1000000 * fps
             if msg.is_meta:
-                frame += msg.time / self.midi.ticks_per_beat * tempo / 1000000 * fps
-
                 if msg.type == "set_tempo":
                     tempo = msg.tempo
             else:
