@@ -67,3 +67,8 @@ class XMido:
         sys.stdout.flush()
 
         return final
+
+
+def anim_pass_ind(obj, value, frame):
+    obj.pass_index = value
+    obj.keyframe_insert(data_path="pass_index", frame=frame)
