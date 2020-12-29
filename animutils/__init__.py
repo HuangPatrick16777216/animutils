@@ -77,3 +77,13 @@ def anim_pass_ind(obj, value, frame):
 def anim_loc(obj, value, frame):
     obj.location = value
     obj.keyframe_insert(data_path="location", frame=frame)
+
+
+def anim_rot(obj, value, frame):
+    obj.rotation_euler = value
+    obj.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+
+def anim_scale(obj, value, frame):
+    obj.scale = value
+    obj.keyframe_insert(data_path="scale", frame=frame)
