@@ -87,3 +87,8 @@ def anim_rot(obj, value, frame):
 def anim_scale(obj, value, frame):
     obj.scale = value
     obj.keyframe_insert(data_path="scale", frame=frame)
+
+
+def anim_attr(obj, attr, value, frame):
+    setattr(obj, attr, value)
+    obj.keyframe_insert(data_path=attr, frame=frame)
