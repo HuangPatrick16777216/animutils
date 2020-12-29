@@ -72,3 +72,8 @@ class XMido:
 def anim_pass_ind(obj, value, frame):
     obj.pass_index = value
     obj.keyframe_insert(data_path="pass_index", frame=frame)
+
+
+def anim_loc(obj, value, frame):
+    obj.location = value
+    obj.keyframe_insert(data_path="location", frame=frame)
