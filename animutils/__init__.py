@@ -78,6 +78,18 @@ def anim_loc(obj, value, frame):
     obj.location = value
     obj.keyframe_insert(data_path="location", frame=frame)
 
+def anim_loc_x(obj, value, frame):
+    obj.location[0] = value
+    obj.keyframe_insert(data_path="location", frame=frame)
+
+def anim_loc_y(obj, value, frame):
+    obj.location[1] = value
+    obj.keyframe_insert(data_path="location", frame=frame)
+
+def anim_loc_z(obj, value, frame):
+    obj.location[2] = value
+    obj.keyframe_insert(data_path="location", frame=frame)
+
 
 def anim_rot(obj, value, frame):
     obj.rotation_euler = value
