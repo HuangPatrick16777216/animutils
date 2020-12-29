@@ -22,7 +22,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="animutils",
-    version="0.0.2",
+    version="0.0.3",
     author="Animated Music",
     author_email="huangpatrick16777216@gmail.com",
     description="Utilities for musical animations in Blender.",
