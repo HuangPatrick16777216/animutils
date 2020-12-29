@@ -69,12 +69,6 @@ class XMido:
         return final
 
 
-def anim_pass_ind(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
-    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
-        bpy.ops.action.select_all(action="DESELECT")
+def anim_pass_ind(obj, value, frame):
     obj.pass_index = value
     obj.keyframe_insert(data_path="pass_index", frame=frame)
-    if handle != "AUTO_CLAMPED":
-        bpy.ops.action.handle_type(type=handle)
-    if type != "KEYFRAME":
-        bpy.ops.action.keyframe_type(type=type)
