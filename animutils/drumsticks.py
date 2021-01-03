@@ -16,10 +16,11 @@
 # ##### END GPL LICENSE BLOCK #####
 
 import bpy
+from .midi import XMido
 
 
 class ThreeJoint:
-    def __init__(self, objs, rest, ready, up, hit):
+    def __init__(self, objs: tuple, rest: tuple, ready: tuple, up: tuple, hit: tuple) -> None:
         """
         Initializes three joint arm.
         :param objs: List of objects: [joint1, joint2, joint3]
@@ -35,3 +36,14 @@ class ThreeJoint:
             "up": up,
             "hit": hit,
         }
+
+    def animate(self, xmido: XMido, notes: list, fps: int, offset: int) -> None:
+        """
+        Animates arm.
+        :param xmido: Extensive mido object.
+        :param notes: List of notes to take as belonging to this instrument.
+        :param fps: Fps of animation.
+        :param offset: Offset of animation start.
+        """
+        messages = xmido.parse(fps, offset)
+        messages = [msg for msg in messages if msg["note"] in notes]
