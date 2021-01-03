@@ -21,7 +21,7 @@ import mido
 class XMido:
     """Extended single track midi object (uses mido)"""
 
-    def __init__(self, path):
+    def __init__(self, path: str) -> None:
         """
         Initializes midi object. Only the first track of the midi will be used.
         :param path: Path of midi file.
@@ -29,7 +29,7 @@ class XMido:
         self.midi = mido.MidiFile(path)
         self.track = self.midi.tracks[0]
 
-    def parse(self, fps, offset):
+    def parse(self, fps: int, offset: int) -> None:
         """
         Removes meta messages and changes timescale to absolute frames.
         :param fps: Frames per second of animation.
