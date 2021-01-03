@@ -23,12 +23,12 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="animutils",
     version="0.0.5",
-    author="Animated Music",
+    author="3D Musicode",
     author_email="huangpatrick16777216@gmail.com",
     description="Utilities for musical animations in Blender.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/animated-music/animutils",
+    url="https://github.com/HuangPatrick16777216/animutils",
     py_modules=["animutils"],
     packages=setuptools.find_packages(),
     install_requires=[
