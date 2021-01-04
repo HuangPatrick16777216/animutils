@@ -38,14 +38,18 @@ class ThreeJoint:
             "hit": hit,
         }
 
-    def animate(self, xmido: XMido, notes: list, fps: int, offset: int, rest_margin: int) -> None:
+    def _unrest(self, frame):
+        for i in range(3):
+            anim_rot(self.objs[i], self.rotations["rest"][i], frame-75)
+            anim_rot(self.objs[i], self.rotations["ready"][i], frame-45)
+
+    def animate(self, xmido: XMido, notes: list, fps: int, offset: int) -> None:
         """
         Animates arm.
         :param xmido: Extensive mido object.
         :param notes: List of notes to take as belonging to this instrument.
         :param fps: Fps of animation.
         :param offset: Offset of animation start.
-        :param rest_margin: Time (frames) to enter into rest if not playing.
         """
         messages = xmido.parse(fps, offset)
         messages = [msg for msg in messages if msg["note"] in notes]
@@ -63,7 +67,7 @@ class ThreeJoint:
             if volume > 0:
                 # Before hit
                 if resting:
-                    self._unrest()
+                    self._unrest(frame)
                     resting = False
 
                 # Hit
@@ -72,7 +76,7 @@ class ThreeJoint:
                 self._hit(frame, prev_hit, next_hit)
 
                 # After hit
-                if next_hit - frame > rest_margin:
-                    self._rest()
+                if next_hit - frame > 100:
+                    self._rest(frame)
                     resting = True
                 prev_hit = frame
