@@ -48,6 +48,10 @@ class ThreeJoint:
             anim_rot(self.objs[i], self.rotations["ready"][i], frame+35)
             anim_rot(self.objs[i], self.rotations["rest"][i], frame+65)
 
+    def _hit(self, frame, prev_hit, next_hit):
+        begin = (frame-prev_hit) > 30
+        end = (next_hit-frame) > 30
+
     def animate(self, xmido: XMido, notes: list, fps: int, offset: int) -> None:
         """
         Animates arm.
@@ -76,8 +80,6 @@ class ThreeJoint:
                     resting = False
 
                 # Hit
-                begin = (frame-prev_hit) > 30
-                end = (next_hit-frame) > 30
                 self._hit(frame, prev_hit, next_hit)
 
                 # After hit
