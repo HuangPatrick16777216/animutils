@@ -43,6 +43,11 @@ class ThreeJoint:
             anim_rot(self.objs[i], self.rotations["rest"][i], frame-75)
             anim_rot(self.objs[i], self.rotations["ready"][i], frame-45)
 
+    def _rest(self, frame):
+        for i in range(3):
+            anim_rot(self.objs[i], self.rotations["ready"][i], frame+35)
+            anim_rot(self.objs[i], self.rotations["rest"][i], frame+65)
+
     def animate(self, xmido: XMido, notes: list, fps: int, offset: int) -> None:
         """
         Animates arm.
