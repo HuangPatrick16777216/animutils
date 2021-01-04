@@ -15,6 +15,7 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import math
 import bpy
 from .midi import XMido
 from .anim import *
@@ -32,10 +33,10 @@ class ThreeJoint:
         """
         self.objs = objs
         self.rotations = {
-            "rest": rest,
-            "ready": ready,
-            "up": up,
-            "hit": hit,
+            "rest": [[math.radians(x) for x in y] for y in rest],
+            "ready": [[math.radians(x) for x in y] for y in ready],
+            "up": [[math.radians(x) for x in y] for y in up],
+            "hit": [[math.radians(x) for x in y] for y in hit],
         }
 
     def _unrest(self, frame):
@@ -66,11 +67,11 @@ class ThreeJoint:
         resting = True
         prev_hit = float("-inf")
         for i, msg in enumerate(messages):
-            volume, frame = msg.volume, msg.time
+            volume, frame = msg["volume"], msg["time"]
             next_hit = float("inf")
             for m in messages[i+1:]:
-                if m.volume > 0:
-                    next_hit = m.time
+                if m["volume"] > 0:
+                    next_hit = m["time"]
                     break
 
             if volume > 0:
