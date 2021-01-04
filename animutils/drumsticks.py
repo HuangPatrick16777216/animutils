@@ -17,6 +17,7 @@
 
 import bpy
 from .midi import XMido
+from .anim import *
 
 
 class ThreeJoint:
@@ -37,13 +38,41 @@ class ThreeJoint:
             "hit": hit,
         }
 
-    def animate(self, xmido: XMido, notes: list, fps: int, offset: int) -> None:
+    def animate(self, xmido: XMido, notes: list, fps: int, offset: int, rest_margin: int) -> None:
         """
         Animates arm.
         :param xmido: Extensive mido object.
         :param notes: List of notes to take as belonging to this instrument.
         :param fps: Fps of animation.
         :param offset: Offset of animation start.
+        :param rest_margin: Time (frames) to enter into rest if not playing.
         """
         messages = xmido.parse(fps, offset)
         messages = [msg for msg in messages if msg["note"] in notes]
+
+        resting = True
+        prev_hit = float("-inf")
+        for i, msg in enumerate(messages):
+            volume, frame = msg.volume, msg.time
+            next_hit = float("inf")
+            for m in messages[i+1:]:
+                if m.volume > 0:
+                    next_hit = m.time
+                    break
+
+            if volume > 0:
+                # Before hit
+                if resting:
+                    self._unrest()
+                    resting = False
+
+                # Hit
+                begin = (frame-prev_hit) > 30
+                end = (next_hit-frame) > 30
+                self._hit(frame, prev_hit, next_hit)
+
+                # After hit
+                if next_hit - frame > rest_margin:
+                    self._rest()
+                    resting = True
+                prev_hit = frame
