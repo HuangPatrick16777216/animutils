@@ -17,3 +17,4 @@
 
 from . import anim
 from . import midi
+from . import drumsticks
