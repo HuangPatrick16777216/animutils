@@ -53,6 +53,12 @@ class ThreeJoint:
         begin = (frame-prev_hit) > 30
         end = (next_hit-frame) > 30
 
+        for i in range(3):
+            if begin:
+                anim_rot(self.objs[i], self.rotations["ready"][i], frame-19)
+            anim_rot(self.objs[i], self.rotations["up"][i], frame-6)
+            anim_rot(self.objs[i], self.rotations["hit"][i], frame)
+
     def animate(self, xmido: XMido, notes: list, fps: int, offset: int) -> None:
         """
         Animates arm.
