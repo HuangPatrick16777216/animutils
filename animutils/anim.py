@@ -150,6 +150,42 @@ def anim_scale(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
     if type != "KEYFRAME":
         bpy.ops.action.keyframe_type(type=type)
 
+def anim_scale_x(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
+    obj.scale[0] = value
+    obj.keyframe_insert(data_path="scale", frame=frame)
+
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_scale_y(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
+    obj.scale[1] = value
+    obj.keyframe_insert(data_path="scale", frame=frame)
+
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_scale_z(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
+    obj.scale[2] = value
+    obj.keyframe_insert(data_path="scale", frame=frame)
+
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
 
 def anim_attr(obj, attr, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
     if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
