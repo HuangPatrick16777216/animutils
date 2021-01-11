@@ -15,6 +15,7 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import math
 import bpy
 
 
@@ -80,11 +81,55 @@ def anim_loc_z(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
         bpy.ops.action.keyframe_type(type=type)
 
 
-def anim_rot(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+def anim_rot(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME", value_is_degrees=True):
     if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
         bpy.ops.action.select_all(action='DESELECT')
 
+    if value_is_degrees:
+        value = [math.radians(i) for i in value]
     obj.rotation_euler = value
+    obj.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_rot_x(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME", value_is_degrees=True):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
+    if value_is_degrees:
+        value = math.radians(value)
+    obj.rotation_euler[0] = value
+    obj.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_rot_y(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME", value_is_degrees=True):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
+    if value_is_degrees:
+        value = math.radians(value)
+    obj.rotation_euler[1] = value
+    obj.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_rot_z(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME", value_is_degrees=True):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
+    if value_is_degrees:
+        value = math.radians(value)
+    obj.rotation_euler[2] = value
     obj.keyframe_insert(data_path="rotation_euler", frame=frame)
 
     if handle != "AUTO_CLAMPED":
