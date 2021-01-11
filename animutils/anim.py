@@ -15,39 +15,105 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import bpy
 
-def anim_pass_ind(obj, value, frame):
+
+def anim_pass_ind(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     obj.pass_index = value
     obj.keyframe_insert(data_path="pass_index", frame=frame)
 
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
 
-def anim_loc(obj, value, frame):
+
+def anim_loc(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     obj.location = value
     obj.keyframe_insert(data_path="location", frame=frame)
 
-def anim_loc_x(obj, value, frame):
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_loc_x(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     obj.location[0] = value
     obj.keyframe_insert(data_path="location", frame=frame)
 
-def anim_loc_y(obj, value, frame):
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_loc_y(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     obj.location[1] = value
     obj.keyframe_insert(data_path="location", frame=frame)
 
-def anim_loc_z(obj, value, frame):
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
+
+def anim_loc_z(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     obj.location[2] = value
     obj.keyframe_insert(data_path="location", frame=frame)
 
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
 
-def anim_rot(obj, value, frame):
+
+def anim_rot(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     obj.rotation_euler = value
     obj.keyframe_insert(data_path="rotation_euler", frame=frame)
 
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
 
-def anim_scale(obj, value, frame):
+
+def anim_scale(obj, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     obj.scale = value
     obj.keyframe_insert(data_path="scale", frame=frame)
 
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
 
-def anim_attr(obj, attr, value, frame):
+
+def anim_attr(obj, attr, value, frame, handle="AUTO_CLAMPED", type="KEYFRAME"):
+    if handle != "AUTO_CLAMPED" or type != "KEYFRAME":
+        bpy.ops.action.select_all(action='DESELECT')
+
     setattr(obj, attr, value)
     obj.keyframe_insert(data_path=attr, frame=frame)
+
+    if handle != "AUTO_CLAMPED":
+        bpy.ops.action.handle_type(type=handle)
+    if type != "KEYFRAME":
+        bpy.ops.action.keyframe_type(type=type)
